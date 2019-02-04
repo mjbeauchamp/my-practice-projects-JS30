@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drum Set</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    <div class="keys">
+        <div data-key='65' class="key">
+            <h2>A</h2>
+        </div>
+        <div data-key='83' class="key">
+            <h2>S</h2>
+        </div>
+        <div data-key='68' class="key">
+            <h2>D</h2>
+        </div>
+        <div data-key='70' class="key">
+            <h2>F</h2>
+        </div>
+        <div data-key='71' class="key">
+            <h2>G</h2>
+        </div>
+        <div data-key='72' class="key">
+            <h2>H</h2>
+        </div>
+        <div data-key='74' class="key">
+            <h2>J</h2>
+        </div>
+        <div data-key='75' class="key">
+            <h2>K</h2>
+        </div>
+        <div data-key='76' class="key">
+            <h2>L</h2>
+        </div>
+
+        <audio data-key="65" src="sounds/clap.wav"></audio>
+        <audio data-key="83" src="sounds/hihat.wav"></audio>
+        <audio data-key="68" src="sounds/kick.wav"></audio>
+        <audio data-key="70" src="sounds/openhat.wav"></audio>
+        <audio data-key="71" src="sounds/boom.wav"></audio>
+        <audio data-key="72" src="sounds/ride.wav"></audio>
+        <audio data-key="74" src="sounds/snare.wav"></audio>
+        <audio data-key="75" src="sounds/tom.wav"></audio>
+        <audio data-key="76" src="sounds/tink.wav"></audio>
+    </div>
+
+</body>
+<script>
+    const ourKeys = ["65", "83", "68", "70", "71", "72", "74", "75", "76"]
+    window.addEventListener('keydown', function(e){
+        if(!ourKeys.includes(e.keyCode.toString())) return;
+        let key = document.querySelector(`.key[data-key="${e.keyCode}"]`)
+        key.classList.add("playing")
+
+        
+    })
+
+    let keys = document.querySelectorAll('.key')
+    keys.forEach(val => {
+        val.addEventListener("transitionend", function(e){
+            if(e.propertyName === "transform"){
+                this.classList.remove("playing")
+            }
+        })
+    })
+</script>
+</html>
